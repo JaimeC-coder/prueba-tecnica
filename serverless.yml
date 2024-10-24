@@ -1,0 +1,59 @@
+
+org: universidadnt
+app: pruebatecnica
+service: pruebaTecnica
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  environment:
+    TABLE_NAME: ${self:service}-table
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:PutItem
+        - dynamodb:GetItem
+        - dynamodb:Scan
+      Resource: 'arn:aws:dynamodb:us-east-1:982081073415:table/${self:provider.environment.TABLE_NAME}'
+
+functions:
+  main:
+    handler: dist/serverless.handler
+    events:
+      - http:
+          method: ANY
+          path: /
+      - http:
+          method: ANY
+          path: '{proxy+}'
+
+package:
+  exclude:
+    - node_modules/**
+    - src/**
+    - tests/**
+    - .gitignore
+    - .git/**
+    - README.md
+    - package-lock.json
+    - tsconfig.json
+    - yarn.lock
+
+resources:
+  Resources:
+    StarWarsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.TABLE_NAME}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+build:
+  esbuild: false
+
+plugins:
+  - serverless-offline
