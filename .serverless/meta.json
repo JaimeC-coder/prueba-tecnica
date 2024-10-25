@@ -1,5 +1,5 @@
 {
-  "C:\\Users\\centu\\Documents\\proyects\\nest\\prueba-tecnica": {
+  "C:\\Users\\centu\\Documents\\proyects\\nest\\prueba-tecnica1": {
     "versionSfCore": null,
     "versionFramework": "4.4.7",
     "isWithinCompose": false,
@@ -12,7 +12,7 @@
           "credentials": "<REDACTED>",
           "serviceConfigFile": {
             "org": "universidadnt",
-            "app": "pruebatecnica",
+            "app": "pruebas",
             "service": "pruebaTecnica",
             "provider": {
               "name": "aws",
@@ -33,411 +33,30 @@
               ],
               "stage": "dev",
               "region": "us-east-1",
-              "versionFunctions": true,
-              "compiledCloudFormationTemplate": {
-                "AWSTemplateFormatVersion": "2010-09-09",
-                "Description": "The AWS CloudFormation template for this Serverless application",
-                "Resources": {
-                  "MainLogGroup": {
-                    "Type": "AWS::Logs::LogGroup",
-                    "Properties": {
-                      "LogGroupName": "/aws/lambda/pruebaTecnica-dev-main"
-                    }
-                  },
-                  "IamRoleLambdaExecution": {
-                    "Type": "AWS::IAM::Role",
-                    "Properties": {
-                      "AssumeRolePolicyDocument": {
-                        "Version": "2012-10-17",
-                        "Statement": [
-                          {
-                            "Effect": "Allow",
-                            "Principal": {
-                              "Service": [
-                                "lambda.amazonaws.com"
-                              ]
-                            },
-                            "Action": [
-                              "sts:AssumeRole"
-                            ]
-                          }
-                        ]
-                      },
-                      "Policies": [
-                        {
-                          "PolicyName": {
-                            "Fn::Join": [
-                              "-",
-                              [
-                                "pruebaTecnica",
-                                "dev",
-                                "lambda"
-                              ]
-                            ]
-                          },
-                          "PolicyDocument": {
-                            "Version": "2012-10-17",
-                            "Statement": [
-                              {
-                                "Effect": "Allow",
-                                "Action": [
-                                  "logs:CreateLogStream",
-                                  "logs:CreateLogGroup",
-                                  "logs:TagResource"
-                                ],
-                                "Resource": [
-                                  {
-                                    "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/pruebaTecnica-dev*:*"
-                                  }
-                                ]
-                              },
-                              {
-                                "Effect": "Allow",
-                                "Action": [
-                                  "logs:PutLogEvents"
-                                ],
-                                "Resource": [
-                                  {
-                                    "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/pruebaTecnica-dev*:*:*"
-                                  }
-                                ]
-                              },
-                              {
-                                "Effect": "Allow",
-                                "Action": [
-                                  "dynamodb:PutItem",
-                                  "dynamodb:GetItem",
-                                  "dynamodb:Scan"
-                                ],
-                                "Resource": "arn:aws:dynamodb:us-east-1:982081073415:table/pruebaTecnica-table"
-                              }
-                            ]
-                          }
-                        }
-                      ],
-                      "Path": "/",
-                      "RoleName": {
-                        "Fn::Join": [
-                          "-",
-                          [
-                            "pruebaTecnica",
-                            "dev",
-                            {
-                              "Ref": "AWS::Region"
-                            },
-                            "lambdaRole"
-                          ]
-                        ]
-                      }
-                    }
-                  },
-                  "MainLambdaFunction": {
-                    "Type": "AWS::Lambda::Function",
-                    "Properties": {
-                      "Code": {
-                        "S3Bucket": "serverless-framework-deployments-us-east-1-b6d524f4-8955",
-                        "S3Key": "serverless/pruebaTecnica/dev/1729791729964-2024-10-24T17:42:09.964Z/pruebaTecnica.zip"
-                      },
-                      "Handler": "dist/serverless.handler",
-                      "Runtime": "nodejs20.x",
-                      "FunctionName": "pruebaTecnica-dev-main",
-                      "MemorySize": 1024,
-                      "Timeout": 6,
-                      "Environment": {
-                        "Variables": {
-                          "TABLE_NAME": "pruebaTecnica-table"
-                        }
-                      },
-                      "Role": {
-                        "Fn::GetAtt": [
-                          "IamRoleLambdaExecution",
-                          "Arn"
-                        ]
-                      }
-                    },
-                    "DependsOn": [
-                      "MainLogGroup"
-                    ]
-                  },
-                  "MainLambdaVersionfQ3xB3feCrHqeRbAl1llfMugvEsGCn0pYale77R0": {
-                    "Type": "AWS::Lambda::Version",
-                    "DeletionPolicy": "Retain",
-                    "Properties": {
-                      "FunctionName": {
-                        "Ref": "MainLambdaFunction"
-                      },
-                      "CodeSha256": "Sj6PKxzYwLTKTr/ZFU+adVPxdbl0xaWicnhPmtfDPAk="
-                    }
-                  },
-                  "ApiGatewayRestApi": {
-                    "Type": "AWS::ApiGateway::RestApi",
-                    "Properties": {
-                      "Name": "dev-pruebaTecnica",
-                      "EndpointConfiguration": {
-                        "Types": [
-                          "EDGE"
-                        ]
-                      },
-                      "Policy": ""
-                    }
-                  },
-                  "ApiGatewayResourceProxyVar": {
-                    "Type": "AWS::ApiGateway::Resource",
-                    "Properties": {
-                      "ParentId": {
-                        "Fn::GetAtt": [
-                          "ApiGatewayRestApi",
-                          "RootResourceId"
-                        ]
-                      },
-                      "PathPart": "{proxy+}",
-                      "RestApiId": {
-                        "Ref": "ApiGatewayRestApi"
-                      }
-                    }
-                  },
-                  "ApiGatewayMethodAny": {
-                    "Type": "AWS::ApiGateway::Method",
-                    "Properties": {
-                      "HttpMethod": "ANY",
-                      "RequestParameters": {},
-                      "ResourceId": {
-                        "Fn::GetAtt": [
-                          "ApiGatewayRestApi",
-                          "RootResourceId"
-                        ]
-                      },
-                      "RestApiId": {
-                        "Ref": "ApiGatewayRestApi"
-                      },
-                      "ApiKeyRequired": "<REDACTED>",
-                      "AuthorizationType": "NONE",
-                      "Integration": {
-                        "IntegrationHttpMethod": "POST",
-                        "Type": "AWS_PROXY",
-                        "Uri": {
-                          "Fn::Join": [
-                            "",
-                            [
-                              "arn:",
-                              {
-                                "Ref": "AWS::Partition"
-                              },
-                              ":apigateway:",
-                              {
-                                "Ref": "AWS::Region"
-                              },
-                              ":lambda:path/2015-03-31/functions/",
-                              {
-                                "Fn::GetAtt": [
-                                  "MainLambdaFunction",
-                                  "Arn"
-                                ]
-                              },
-                              "/invocations"
-                            ]
-                          ]
-                        }
-                      },
-                      "MethodResponses": []
-                    },
-                    "DependsOn": [
-                      "MainLambdaPermissionApiGateway"
-                    ]
-                  },
-                  "ApiGatewayMethodProxyVarAny": {
-                    "Type": "AWS::ApiGateway::Method",
-                    "Properties": {
-                      "HttpMethod": "ANY",
-                      "RequestParameters": {},
-                      "ResourceId": {
-                        "Ref": "ApiGatewayResourceProxyVar"
-                      },
-                      "RestApiId": {
-                        "Ref": "ApiGatewayRestApi"
-                      },
-                      "ApiKeyRequired": "<REDACTED>",
-                      "AuthorizationType": "NONE",
-                      "Integration": {
-                        "IntegrationHttpMethod": "POST",
-                        "Type": "AWS_PROXY",
-                        "Uri": {
-                          "Fn::Join": [
-                            "",
-                            [
-                              "arn:",
-                              {
-                                "Ref": "AWS::Partition"
-                              },
-                              ":apigateway:",
-                              {
-                                "Ref": "AWS::Region"
-                              },
-                              ":lambda:path/2015-03-31/functions/",
-                              {
-                                "Fn::GetAtt": [
-                                  "MainLambdaFunction",
-                                  "Arn"
-                                ]
-                              },
-                              "/invocations"
-                            ]
-                          ]
-                        }
-                      },
-                      "MethodResponses": []
-                    },
-                    "DependsOn": [
-                      "MainLambdaPermissionApiGateway"
-                    ]
-                  },
-                  "ApiGatewayDeployment1729791726947": {
-                    "Type": "AWS::ApiGateway::Deployment",
-                    "Properties": {
-                      "RestApiId": {
-                        "Ref": "ApiGatewayRestApi"
-                      },
-                      "StageName": "dev"
-                    },
-                    "DependsOn": [
-                      "ApiGatewayMethodAny",
-                      "ApiGatewayMethodProxyVarAny"
-                    ]
-                  },
-                  "MainLambdaPermissionApiGateway": {
-                    "Type": "AWS::Lambda::Permission",
-                    "Properties": {
-                      "FunctionName": {
-                        "Fn::GetAtt": [
-                          "MainLambdaFunction",
-                          "Arn"
-                        ]
-                      },
-                      "Action": "lambda:InvokeFunction",
-                      "Principal": "apigateway.amazonaws.com",
-                      "SourceArn": {
-                        "Fn::Join": [
-                          "",
-                          [
-                            "arn:",
-                            {
-                              "Ref": "AWS::Partition"
-                            },
-                            ":execute-api:",
-                            {
-                              "Ref": "AWS::Region"
-                            },
-                            ":",
-                            {
-                              "Ref": "AWS::AccountId"
-                            },
-                            ":",
-                            {
-                              "Ref": "ApiGatewayRestApi"
-                            },
-                            "/*/*"
-                          ]
-                        ]
-                      }
-                    }
-                  },
-                  "StarWarsTable": {
-                    "Type": "AWS::DynamoDB::Table",
-                    "Properties": {
-                      "TableName": "pruebaTecnica-table",
-                      "AttributeDefinitions": [
-                        {
-                          "AttributeName": "id",
-                          "AttributeType": "S"
-                        }
-                      ],
-                      "KeySchema": [
-                        {
-                          "AttributeName": "id",
-                          "KeyType": "HASH"
-                        }
-                      ],
-                      "BillingMode": "PAY_PER_REQUEST"
-                    }
-                  }
-                },
-                "Outputs": {
-                  "ServerlessDeploymentBucketName": {
-                    "Value": "serverless-framework-deployments-us-east-1-b6d524f4-8955",
-                    "Export": {
-                      "Name": "sls-pruebaTecnica-dev-ServerlessDeploymentBucketName"
-                    }
-                  },
-                  "MainLambdaFunctionQualifiedArn": {
-                    "Description": "Current Lambda function version",
-                    "Value": {
-                      "Ref": "MainLambdaVersionfQ3xB3feCrHqeRbAl1llfMugvEsGCn0pYale77R0"
-                    },
-                    "Export": {
-                      "Name": "sls-pruebaTecnica-dev-MainLambdaFunctionQualifiedArn"
-                    }
-                  },
-                  "ServiceEndpoint": {
-                    "Description": "URL of the service endpoint",
-                    "Value": {
-                      "Fn::Join": [
-                        "",
-                        [
-                          "https://",
-                          {
-                            "Ref": "ApiGatewayRestApi"
-                          },
-                          ".execute-api.",
-                          {
-                            "Ref": "AWS::Region"
-                          },
-                          ".",
-                          {
-                            "Ref": "AWS::URLSuffix"
-                          },
-                          "/dev"
-                        ]
-                      ]
-                    },
-                    "Export": {
-                      "Name": "sls-pruebaTecnica-dev-ServiceEndpoint"
-                    }
-                  }
-                }
-              },
-              "vpc": {}
+              "versionFunctions": true
             },
             "functions": {
               "main": {
                 "handler": "dist/serverless.handler",
+                "timeout": 30,
                 "events": [
                   {
                     "http": {
-                      "method": "any",
-                      "path": "",
-                      "integration": "AWS_PROXY"
+                      "method": "ANY",
+                      "path": "/"
                     }
                   },
                   {
                     "http": {
-                      "method": "any",
-                      "path": "{proxy+}",
-                      "integration": "AWS_PROXY"
+                      "method": "ANY",
+                      "path": "{proxy+}"
                     }
                   }
-                ],
-                "name": "pruebaTecnica-dev-main",
-                "package": {},
-                "memory": 1024,
-                "timeout": 6,
-                "runtime": "nodejs20.x",
-                "vpc": {},
-                "versionLogicalId": "MainLambdaVersionfQ3xB3feCrHqeRbAl1llfMugvEsGCn0pYale77R0"
+                ]
               }
             },
             "package": {
               "exclude": [
-                "node_modules/**",
                 "src/**",
                 "tests/**",
                 ".gitignore",
@@ -446,11 +65,7 @@
                 "package-lock.json",
                 "tsconfig.json",
                 "yarn.lock"
-              ],
-              "artifactsS3KeyDirname": "serverless/pruebaTecnica/dev/code-artifacts",
-              "deploymentBucket": "serverless-framework-deployments-us-east-1-b6d524f4-8955",
-              "artifact": "C:\\Users\\centu\\Documents\\proyects\\nest\\prueba-tecnica\\.serverless\\pruebaTecnica.zip",
-              "artifactDirectoryName": "serverless/pruebaTecnica/dev/1729791729964-2024-10-24T17:42:09.964Z"
+              ]
             },
             "resources": {
               "Resources": {
@@ -473,8 +88,7 @@
                     "BillingMode": "PAY_PER_REQUEST"
                   }
                 }
-              },
-              "Outputs": {}
+              }
             },
             "build": {
               "esbuild": false
@@ -483,7 +97,7 @@
               "serverless-offline"
             ]
           },
-          "configFileDirPath": "C:\\Users\\centu\\Documents\\proyects\\nest\\prueba-tecnica",
+          "configFileDirPath": "C:\\Users\\centu\\Documents\\proyects\\nest\\prueba-tecnica1",
           "config": {
             "type": "self"
           },
@@ -501,11 +115,11 @@
       }
     },
     "composeServiceName": null,
-    "servicePath": "C:\\Users\\centu\\Documents\\proyects\\nest\\prueba-tecnica",
+    "servicePath": "C:\\Users\\centu\\Documents\\proyects\\nest\\prueba-tecnica1",
     "serviceConfigFileName": "serverless.yml",
     "service": {
       "org": "universidadnt",
-      "app": "pruebatecnica",
+      "app": "pruebas",
       "service": "pruebaTecnica",
       "provider": {
         "name": "aws",
@@ -526,411 +140,30 @@
         ],
         "stage": "dev",
         "region": "us-east-1",
-        "versionFunctions": true,
-        "compiledCloudFormationTemplate": {
-          "AWSTemplateFormatVersion": "2010-09-09",
-          "Description": "The AWS CloudFormation template for this Serverless application",
-          "Resources": {
-            "MainLogGroup": {
-              "Type": "AWS::Logs::LogGroup",
-              "Properties": {
-                "LogGroupName": "/aws/lambda/pruebaTecnica-dev-main"
-              }
-            },
-            "IamRoleLambdaExecution": {
-              "Type": "AWS::IAM::Role",
-              "Properties": {
-                "AssumeRolePolicyDocument": {
-                  "Version": "2012-10-17",
-                  "Statement": [
-                    {
-                      "Effect": "Allow",
-                      "Principal": {
-                        "Service": [
-                          "lambda.amazonaws.com"
-                        ]
-                      },
-                      "Action": [
-                        "sts:AssumeRole"
-                      ]
-                    }
-                  ]
-                },
-                "Policies": [
-                  {
-                    "PolicyName": {
-                      "Fn::Join": [
-                        "-",
-                        [
-                          "pruebaTecnica",
-                          "dev",
-                          "lambda"
-                        ]
-                      ]
-                    },
-                    "PolicyDocument": {
-                      "Version": "2012-10-17",
-                      "Statement": [
-                        {
-                          "Effect": "Allow",
-                          "Action": [
-                            "logs:CreateLogStream",
-                            "logs:CreateLogGroup",
-                            "logs:TagResource"
-                          ],
-                          "Resource": [
-                            {
-                              "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/pruebaTecnica-dev*:*"
-                            }
-                          ]
-                        },
-                        {
-                          "Effect": "Allow",
-                          "Action": [
-                            "logs:PutLogEvents"
-                          ],
-                          "Resource": [
-                            {
-                              "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/pruebaTecnica-dev*:*:*"
-                            }
-                          ]
-                        },
-                        {
-                          "Effect": "Allow",
-                          "Action": [
-                            "dynamodb:PutItem",
-                            "dynamodb:GetItem",
-                            "dynamodb:Scan"
-                          ],
-                          "Resource": "arn:aws:dynamodb:us-east-1:982081073415:table/pruebaTecnica-table"
-                        }
-                      ]
-                    }
-                  }
-                ],
-                "Path": "/",
-                "RoleName": {
-                  "Fn::Join": [
-                    "-",
-                    [
-                      "pruebaTecnica",
-                      "dev",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      "lambdaRole"
-                    ]
-                  ]
-                }
-              }
-            },
-            "MainLambdaFunction": {
-              "Type": "AWS::Lambda::Function",
-              "Properties": {
-                "Code": {
-                  "S3Bucket": "serverless-framework-deployments-us-east-1-b6d524f4-8955",
-                  "S3Key": "serverless/pruebaTecnica/dev/1729791729964-2024-10-24T17:42:09.964Z/pruebaTecnica.zip"
-                },
-                "Handler": "dist/serverless.handler",
-                "Runtime": "nodejs20.x",
-                "FunctionName": "pruebaTecnica-dev-main",
-                "MemorySize": 1024,
-                "Timeout": 6,
-                "Environment": {
-                  "Variables": {
-                    "TABLE_NAME": "pruebaTecnica-table"
-                  }
-                },
-                "Role": {
-                  "Fn::GetAtt": [
-                    "IamRoleLambdaExecution",
-                    "Arn"
-                  ]
-                }
-              },
-              "DependsOn": [
-                "MainLogGroup"
-              ]
-            },
-            "MainLambdaVersionfQ3xB3feCrHqeRbAl1llfMugvEsGCn0pYale77R0": {
-              "Type": "AWS::Lambda::Version",
-              "DeletionPolicy": "Retain",
-              "Properties": {
-                "FunctionName": {
-                  "Ref": "MainLambdaFunction"
-                },
-                "CodeSha256": "Sj6PKxzYwLTKTr/ZFU+adVPxdbl0xaWicnhPmtfDPAk="
-              }
-            },
-            "ApiGatewayRestApi": {
-              "Type": "AWS::ApiGateway::RestApi",
-              "Properties": {
-                "Name": "dev-pruebaTecnica",
-                "EndpointConfiguration": {
-                  "Types": [
-                    "EDGE"
-                  ]
-                },
-                "Policy": ""
-              }
-            },
-            "ApiGatewayResourceProxyVar": {
-              "Type": "AWS::ApiGateway::Resource",
-              "Properties": {
-                "ParentId": {
-                  "Fn::GetAtt": [
-                    "ApiGatewayRestApi",
-                    "RootResourceId"
-                  ]
-                },
-                "PathPart": "{proxy+}",
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                }
-              }
-            },
-            "ApiGatewayMethodAny": {
-              "Type": "AWS::ApiGateway::Method",
-              "Properties": {
-                "HttpMethod": "ANY",
-                "RequestParameters": {},
-                "ResourceId": {
-                  "Fn::GetAtt": [
-                    "ApiGatewayRestApi",
-                    "RootResourceId"
-                  ]
-                },
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                },
-                "ApiKeyRequired": "<REDACTED>",
-                "AuthorizationType": "NONE",
-                "Integration": {
-                  "IntegrationHttpMethod": "POST",
-                  "Type": "AWS_PROXY",
-                  "Uri": {
-                    "Fn::Join": [
-                      "",
-                      [
-                        "arn:",
-                        {
-                          "Ref": "AWS::Partition"
-                        },
-                        ":apigateway:",
-                        {
-                          "Ref": "AWS::Region"
-                        },
-                        ":lambda:path/2015-03-31/functions/",
-                        {
-                          "Fn::GetAtt": [
-                            "MainLambdaFunction",
-                            "Arn"
-                          ]
-                        },
-                        "/invocations"
-                      ]
-                    ]
-                  }
-                },
-                "MethodResponses": []
-              },
-              "DependsOn": [
-                "MainLambdaPermissionApiGateway"
-              ]
-            },
-            "ApiGatewayMethodProxyVarAny": {
-              "Type": "AWS::ApiGateway::Method",
-              "Properties": {
-                "HttpMethod": "ANY",
-                "RequestParameters": {},
-                "ResourceId": {
-                  "Ref": "ApiGatewayResourceProxyVar"
-                },
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                },
-                "ApiKeyRequired": "<REDACTED>",
-                "AuthorizationType": "NONE",
-                "Integration": {
-                  "IntegrationHttpMethod": "POST",
-                  "Type": "AWS_PROXY",
-                  "Uri": {
-                    "Fn::Join": [
-                      "",
-                      [
-                        "arn:",
-                        {
-                          "Ref": "AWS::Partition"
-                        },
-                        ":apigateway:",
-                        {
-                          "Ref": "AWS::Region"
-                        },
-                        ":lambda:path/2015-03-31/functions/",
-                        {
-                          "Fn::GetAtt": [
-                            "MainLambdaFunction",
-                            "Arn"
-                          ]
-                        },
-                        "/invocations"
-                      ]
-                    ]
-                  }
-                },
-                "MethodResponses": []
-              },
-              "DependsOn": [
-                "MainLambdaPermissionApiGateway"
-              ]
-            },
-            "ApiGatewayDeployment1729791726947": {
-              "Type": "AWS::ApiGateway::Deployment",
-              "Properties": {
-                "RestApiId": {
-                  "Ref": "ApiGatewayRestApi"
-                },
-                "StageName": "dev"
-              },
-              "DependsOn": [
-                "ApiGatewayMethodAny",
-                "ApiGatewayMethodProxyVarAny"
-              ]
-            },
-            "MainLambdaPermissionApiGateway": {
-              "Type": "AWS::Lambda::Permission",
-              "Properties": {
-                "FunctionName": {
-                  "Fn::GetAtt": [
-                    "MainLambdaFunction",
-                    "Arn"
-                  ]
-                },
-                "Action": "lambda:InvokeFunction",
-                "Principal": "apigateway.amazonaws.com",
-                "SourceArn": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":execute-api:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":",
-                      {
-                        "Ref": "ApiGatewayRestApi"
-                      },
-                      "/*/*"
-                    ]
-                  ]
-                }
-              }
-            },
-            "StarWarsTable": {
-              "Type": "AWS::DynamoDB::Table",
-              "Properties": {
-                "TableName": "pruebaTecnica-table",
-                "AttributeDefinitions": [
-                  {
-                    "AttributeName": "id",
-                    "AttributeType": "S"
-                  }
-                ],
-                "KeySchema": [
-                  {
-                    "AttributeName": "id",
-                    "KeyType": "HASH"
-                  }
-                ],
-                "BillingMode": "PAY_PER_REQUEST"
-              }
-            }
-          },
-          "Outputs": {
-            "ServerlessDeploymentBucketName": {
-              "Value": "serverless-framework-deployments-us-east-1-b6d524f4-8955",
-              "Export": {
-                "Name": "sls-pruebaTecnica-dev-ServerlessDeploymentBucketName"
-              }
-            },
-            "MainLambdaFunctionQualifiedArn": {
-              "Description": "Current Lambda function version",
-              "Value": {
-                "Ref": "MainLambdaVersionfQ3xB3feCrHqeRbAl1llfMugvEsGCn0pYale77R0"
-              },
-              "Export": {
-                "Name": "sls-pruebaTecnica-dev-MainLambdaFunctionQualifiedArn"
-              }
-            },
-            "ServiceEndpoint": {
-              "Description": "URL of the service endpoint",
-              "Value": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "https://",
-                    {
-                      "Ref": "ApiGatewayRestApi"
-                    },
-                    ".execute-api.",
-                    {
-                      "Ref": "AWS::Region"
-                    },
-                    ".",
-                    {
-                      "Ref": "AWS::URLSuffix"
-                    },
-                    "/dev"
-                  ]
-                ]
-              },
-              "Export": {
-                "Name": "sls-pruebaTecnica-dev-ServiceEndpoint"
-              }
-            }
-          }
-        },
-        "vpc": {}
+        "versionFunctions": true
       },
       "functions": {
         "main": {
           "handler": "dist/serverless.handler",
+          "timeout": 30,
           "events": [
             {
               "http": {
-                "method": "any",
-                "path": "",
-                "integration": "AWS_PROXY"
+                "method": "ANY",
+                "path": "/"
               }
             },
             {
               "http": {
-                "method": "any",
-                "path": "{proxy+}",
-                "integration": "AWS_PROXY"
+                "method": "ANY",
+                "path": "{proxy+}"
               }
             }
-          ],
-          "name": "pruebaTecnica-dev-main",
-          "package": {},
-          "memory": 1024,
-          "timeout": 6,
-          "runtime": "nodejs20.x",
-          "vpc": {},
-          "versionLogicalId": "MainLambdaVersionfQ3xB3feCrHqeRbAl1llfMugvEsGCn0pYale77R0"
+          ]
         }
       },
       "package": {
         "exclude": [
-          "node_modules/**",
           "src/**",
           "tests/**",
           ".gitignore",
@@ -939,11 +172,7 @@
           "package-lock.json",
           "tsconfig.json",
           "yarn.lock"
-        ],
-        "artifactsS3KeyDirname": "serverless/pruebaTecnica/dev/code-artifacts",
-        "deploymentBucket": "serverless-framework-deployments-us-east-1-b6d524f4-8955",
-        "artifact": "C:\\Users\\centu\\Documents\\proyects\\nest\\prueba-tecnica\\.serverless\\pruebaTecnica.zip",
-        "artifactDirectoryName": "serverless/pruebaTecnica/dev/1729791729964-2024-10-24T17:42:09.964Z"
+        ]
       },
       "resources": {
         "Resources": {
@@ -966,8 +195,7 @@
               "BillingMode": "PAY_PER_REQUEST"
             }
           }
-        },
-        "Outputs": {}
+        }
       },
       "build": {
         "esbuild": false
@@ -976,12 +204,16 @@
         "serverless-offline"
       ]
     },
-    "serviceRawFile": "\r\norg: universidadnt\r\napp: pruebatecnica\r\nservice: pruebaTecnica\r\n\r\nprovider:\r\n  name: aws\r\n  runtime: nodejs20.x\r\n  environment:\r\n    TABLE_NAME: ${self:service}-table\r\n  iamRoleStatements:\r\n    - Effect: Allow\r\n      Action:\r\n        - dynamodb:PutItem\r\n        - dynamodb:GetItem\r\n        - dynamodb:Scan\r\n      Resource: 'arn:aws:dynamodb:us-east-1:982081073415:table/${self:provider.environment.TABLE_NAME}'\r\n\r\nfunctions:\r\n  main:\r\n    handler: dist/serverless.handler\r\n    events:\r\n      - http:\r\n          method: ANY\r\n          path: /\r\n      - http:\r\n          method: ANY\r\n          path: '{proxy+}'\r\n\r\npackage:\r\n  exclude:\r\n    - node_modules/**\r\n    - src/**\r\n    - tests/**\r\n    - .gitignore\r\n    - .git/**\r\n    - README.md\r\n    - package-lock.json\r\n    - tsconfig.json\r\n    - yarn.lock\r\n\r\nresources:\r\n  Resources:\r\n    StarWarsTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: ${self:provider.environment.TABLE_NAME}\r\n        AttributeDefinitions:\r\n          - AttributeName: id\r\n            AttributeType: S\r\n        KeySchema:\r\n          - AttributeName: id\r\n            KeyType: HASH\r\n        BillingMode: PAY_PER_REQUEST\r\nbuild:\r\n  esbuild: false\r\n\r\nplugins:\r\n  - serverless-offline",
+    "serviceRawFile": "\r\norg: universidadnt\r\napp: pruebas\r\nservice: pruebaTecnica\r\n\r\nprovider:\r\n  name: aws\r\n  runtime: nodejs20.x\r\n  environment:\r\n    TABLE_NAME: ${self:service}-table\r\n  iamRoleStatements:\r\n    - Effect: Allow\r\n      Action:\r\n        - dynamodb:PutItem\r\n        - dynamodb:GetItem\r\n        - dynamodb:Scan\r\n      Resource: 'arn:aws:dynamodb:us-east-1:982081073415:table/${self:provider.environment.TABLE_NAME}'\r\n\r\nfunctions:\r\n  main:\r\n    handler: dist/serverless.handler\r\n    timeout: 30\r\n    events:\r\n      - http:\r\n          method: ANY\r\n          path: /\r\n      - http:\r\n          method: ANY\r\n          path: '{proxy+}'\r\n\r\npackage:\r\n  exclude:\r\n    - src/**\r\n    - tests/**\r\n    - .gitignore\r\n    - .git/**\r\n    - README.md\r\n    - package-lock.json\r\n    - tsconfig.json\r\n    - yarn.lock\r\nresources:\r\n  Resources:\r\n    StarWarsTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: ${self:provider.environment.TABLE_NAME}\r\n        AttributeDefinitions:\r\n          - AttributeName: id\r\n            AttributeType: S\r\n        KeySchema:\r\n          - AttributeName: id\r\n            KeyType: HASH\r\n        BillingMode: PAY_PER_REQUEST\r\nbuild:\r\n  esbuild: false\r\n\r\nplugins:\r\n  - serverless-offline",
     "command": [
-      "deploy"
+      "offline"
     ],
     "options": {},
-    "error": null,
+    "error": {
+      "message": "Serverless plugin \"serverless-offline\" not found. Make sure it's installed and listed in the \"plugins\" section of your serverless config file. Use the --debug flag to learn more.",
+      "stack": "ServerlessError2: Serverless plugin \"serverless-offline\" not found. Make sure it's installed and listed in the \"plugins\" section of your serverless config file. Use the --debug flag to learn more.\n    at PluginManager.resolveServicePlugins (file:///C:/Users/centu/.serverless/releases/4.4.7/package/dist/sf-core.js:953:2671)\n    at async PluginManager.loadAllPlugins (file:///C:/Users/centu/.serverless/releases/4.4.7/package/dist/sf-core.js:953:1293)\n    at async Serverless.init (file:///C:/Users/centu/.serverless/releases/4.4.7/package/dist/sf-core.js:960:9930)\n    at async runFramework (file:///C:/Users/centu/.serverless/releases/4.4.7/package/dist/sf-core.js:983:1262)\n    at async route (file:///C:/Users/centu/.serverless/releases/4.4.7/package/dist/sf-core.js:1011:14772)\n    at async Object.run2 [as run] (file:///C:/Users/centu/.serverless/releases/4.4.7/package/dist/sf-core.js:1011:15173)\n    at async run3 (file:///C:/Users/centu/.serverless/releases/4.4.7/package/dist/sf-core.js:1011:16435)",
+      "code": "PLUGIN_NOT_FOUND"
+    },
     "params": {},
     "machineId": "d187b35d47690b8f5a1e540c2f65c38c",
     "stage": "dev",
@@ -998,7 +230,7 @@
         "monitoring": false
       },
       "orgObservabilityIntegrations": null,
-      "serviceAppId": "tWG1MG2qPsK4pVW8yn",
+      "serviceAppId": "6mp9JNRjMKhdFBJkc7",
       "serviceProvider": null,
       "instanceParameters": null
     },
@@ -1010,30 +242,40 @@
     "serviceProviderAwsAccountId": "982081073415",
     "projectType": "traditional",
     "versionSf": "4.4.7",
-    "serviceProviderAwsCfStackName": "pruebaTecnica-dev",
-    "integrations": {},
-    "serviceUniqueId": "arn:aws:cloudformation:us-east-1:982081073415:stack/pruebaTecnica-dev/99b7ee20-9203-11ef-988b-12473321f867",
-    "serviceProviderAwsCfStackId": "arn:aws:cloudformation:us-east-1:982081073415:stack/pruebaTecnica-dev/99b7ee20-9203-11ef-988b-12473321f867",
-    "serviceProviderAwsCfStackCreated": "2024-10-24T12:29:23.464Z",
-    "serviceProviderAwsCfStackUpdated": "2024-10-24T17:42:16.088Z",
+    "serviceUniqueId": "arn:aws:cloudformation:us-east-1:982081073415:stack/pruebaTecnica3-dev/eef0af20-9312-11ef-a1b8-1256e5c7f4a7",
+    "serviceProviderAwsCfStackId": "arn:aws:cloudformation:us-east-1:982081073415:stack/pruebaTecnica3-dev/eef0af20-9312-11ef-a1b8-1256e5c7f4a7",
+    "serviceProviderAwsCfStackCreated": "2024-10-25T20:51:40.034Z",
+    "serviceProviderAwsCfStackUpdated": "2024-10-25T21:16:49.906Z",
     "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
     "serviceProviderAwsCfStackOutputs": [
       {
-        "OutputKey": "MainLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:982081073415:function:pruebaTecnica-dev-main:1",
+        "OutputKey": "CreateCharacterLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:us-east-1:982081073415:function:pruebaTecnica3-dev-createCharacter:3",
         "Description": "Current Lambda function version",
-        "ExportName": "sls-pruebaTecnica-dev-MainLambdaFunctionQualifiedArn"
+        "ExportName": "sls-pruebaTecnica3-dev-CreateCharacterLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "GetCharactersLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:us-east-1:982081073415:function:pruebaTecnica3-dev-getCharacters:3",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-pruebaTecnica3-dev-GetCharactersLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "GetPersonajeSWAPILambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:us-east-1:982081073415:function:pruebaTecnica3-dev-getPersonajeSWAPI:3",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-pruebaTecnica3-dev-GetPersonajeSWAPILambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "ServiceEndpoint",
-        "OutputValue": "https://ep1ghlvmt1.execute-api.us-east-1.amazonaws.com/dev",
+        "OutputValue": "https://4kmavcg8w4.execute-api.us-east-1.amazonaws.com/dev",
         "Description": "URL of the service endpoint",
-        "ExportName": "sls-pruebaTecnica-dev-ServiceEndpoint"
+        "ExportName": "sls-pruebaTecnica3-dev-ServiceEndpoint"
       },
       {
         "OutputKey": "ServerlessDeploymentBucketName",
         "OutputValue": "serverless-framework-deployments-us-east-1-b6d524f4-8955",
-        "ExportName": "sls-pruebaTecnica-dev-ServerlessDeploymentBucketName"
+        "ExportName": "sls-pruebaTecnica3-dev-ServerlessDeploymentBucketName"
       }
     ]
   }

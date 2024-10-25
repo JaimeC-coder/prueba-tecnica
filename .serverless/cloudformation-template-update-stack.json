@@ -100,13 +100,13 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-us-east-1-b6d524f4-8955",
-          "S3Key": "serverless/pruebaTecnica/dev/1729791729964-2024-10-24T17:42:09.964Z/pruebaTecnica.zip"
+          "S3Key": "serverless/pruebaTecnica/dev/1729890478252-2024-10-25T21:07:58.252Z/pruebaTecnica.zip"
         },
         "Handler": "dist/serverless.handler",
         "Runtime": "nodejs20.x",
         "FunctionName": "pruebaTecnica-dev-main",
         "MemorySize": 1024,
-        "Timeout": 6,
+        "Timeout": 30,
         "Environment": {
           "Variables": {
             "TABLE_NAME": "pruebaTecnica-table"
@@ -123,14 +123,14 @@
         "MainLogGroup"
       ]
     },
-    "MainLambdaVersionfQ3xB3feCrHqeRbAl1llfMugvEsGCn0pYale77R0": {
+    "MainLambdaVersionY8pYQTelqVRoH6HUgFm6T3gyfqN8hZhXuBRApRE3cA": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "MainLambdaFunction"
         },
-        "CodeSha256": "Sj6PKxzYwLTKTr/ZFU+adVPxdbl0xaWicnhPmtfDPAk="
+        "CodeSha256": "gGl/qVbP//9OvABGSq9Oi1LmxkxtKgsyx9OD4aFDRsE="
       }
     },
     "ApiGatewayRestApi": {
@@ -255,7 +255,7 @@
         "MainLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1729791726947": {
+    "ApiGatewayDeployment1729890407956": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -335,7 +335,7 @@
     "MainLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "MainLambdaVersionfQ3xB3feCrHqeRbAl1llfMugvEsGCn0pYale77R0"
+        "Ref": "MainLambdaVersionY8pYQTelqVRoH6HUgFm6T3gyfqN8hZhXuBRApRE3cA"
       },
       "Export": {
         "Name": "sls-pruebaTecnica-dev-MainLambdaFunctionQualifiedArn"

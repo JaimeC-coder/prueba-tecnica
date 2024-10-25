@@ -1,6 +1,6 @@
 
 org: universidadnt
-app: pruebatecnica
+app: pruebas
 service: pruebaTecnica
 
 provider:
@@ -19,6 +19,7 @@ provider:
 functions:
   main:
     handler: dist/serverless.handler
+    timeout: 30
     events:
       - http:
           method: ANY
@@ -29,7 +30,7 @@ functions:
 
 package:
   exclude:
-    - node_modules/**
+    - node_modules/**n
     - src/**
     - tests/**
     - .gitignore
@@ -38,7 +39,6 @@ package:
     - package-lock.json
     - tsconfig.json
     - yarn.lock
-
 resources:
   Resources:
     StarWarsTable:

@@ -120,13 +120,13 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-1-b6d524f4-8955",
-                "S3Key": "serverless/pruebaTecnica/dev/1729791729964-2024-10-24T17:42:09.964Z/pruebaTecnica.zip"
+                "S3Key": "serverless/pruebaTecnica/dev/1729890478252-2024-10-25T21:07:58.252Z/pruebaTecnica.zip"
               },
               "Handler": "dist/serverless.handler",
               "Runtime": "nodejs20.x",
               "FunctionName": "pruebaTecnica-dev-main",
               "MemorySize": 1024,
-              "Timeout": 6,
+              "Timeout": 30,
               "Environment": {
                 "Variables": {
                   "TABLE_NAME": "pruebaTecnica-table"
@@ -143,14 +143,14 @@
               "MainLogGroup"
             ]
           },
-          "MainLambdaVersionfQ3xB3feCrHqeRbAl1llfMugvEsGCn0pYale77R0": {
+          "MainLambdaVersionY8pYQTelqVRoH6HUgFm6T3gyfqN8hZhXuBRApRE3cA": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "MainLambdaFunction"
               },
-              "CodeSha256": "Sj6PKxzYwLTKTr/ZFU+adVPxdbl0xaWicnhPmtfDPAk="
+              "CodeSha256": "gGl/qVbP//9OvABGSq9Oi1LmxkxtKgsyx9OD4aFDRsE="
             }
           },
           "ApiGatewayRestApi": {
@@ -275,7 +275,7 @@
               "MainLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1729791726947": {
+          "ApiGatewayDeployment1729890407956": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -355,7 +355,7 @@
           "MainLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "MainLambdaVersionfQ3xB3feCrHqeRbAl1llfMugvEsGCn0pYale77R0"
+              "Ref": "MainLambdaVersionY8pYQTelqVRoH6HUgFm6T3gyfqN8hZhXuBRApRE3cA"
             },
             "Export": {
               "Name": "sls-pruebaTecnica-dev-MainLambdaFunctionQualifiedArn"
@@ -391,13 +391,11 @@
       },
       "vpc": {}
     },
-    "plugins": [
-      "serverless-offline"
-    ],
     "pluginsData": {},
     "functions": {
       "main": {
         "handler": "dist/serverless.handler",
+        "timeout": 30,
         "events": [
           {
             "http": {
@@ -417,10 +415,9 @@
         "name": "pruebaTecnica-dev-main",
         "package": {},
         "memory": 1024,
-        "timeout": 6,
         "runtime": "nodejs20.x",
         "vpc": {},
-        "versionLogicalId": "MainLambdaVersionfQ3xB3feCrHqeRbAl1llfMugvEsGCn0pYale77R0"
+        "versionLogicalId": "MainLambdaVersionY8pYQTelqVRoH6HUgFm6T3gyfqN8hZhXuBRApRE3cA"
       }
     },
     "resources": {
@@ -451,7 +448,7 @@
     "serviceFilename": "serverless.yml",
     "initialServerlessConfig": {
       "org": "universidadnt",
-      "app": "pruebatecnica",
+      "app": "pruebas",
       "service": "pruebaTecnica",
       "provider": {
         "$ref": "$[\"service\"][\"provider\"]"
@@ -461,7 +458,6 @@
       },
       "package": {
         "exclude": [
-          "node_modules/**",
           "src/**",
           "tests/**",
           ".gitignore",
@@ -473,20 +469,17 @@
         ],
         "artifactsS3KeyDirname": "serverless/pruebaTecnica/dev/code-artifacts",
         "deploymentBucket": "serverless-framework-deployments-us-east-1-b6d524f4-8955",
-        "artifact": "C:\\Users\\centu\\Documents\\proyects\\nest\\prueba-tecnica\\.serverless\\pruebaTecnica.zip",
-        "artifactDirectoryName": "serverless/pruebaTecnica/dev/1729791729964-2024-10-24T17:42:09.964Z"
+        "artifact": "C:\\Users\\centu\\Documents\\proyects\\nest\\prueba-tecnica1\\.serverless\\pruebaTecnica.zip",
+        "artifactDirectoryName": "serverless/pruebaTecnica/dev/1729890478252-2024-10-25T21:07:58.252Z"
       },
       "resources": {
         "$ref": "$[\"service\"][\"resources\"]"
       },
       "build": {
         "esbuild": false
-      },
-      "plugins": {
-        "$ref": "$[\"service\"][\"plugins\"]"
       }
     },
-    "app": "pruebatecnica",
+    "app": "pruebas",
     "appId": null,
     "org": "universidadnt",
     "orgId": null,
@@ -494,10 +487,10 @@
       "$ref": "$[\"service\"][\"initialServerlessConfig\"][\"build\"]"
     },
     "layers": {},
-    "artifact": "C:\\Users\\centu\\Documents\\proyects\\nest\\prueba-tecnica\\.serverless\\pruebaTecnica.zip"
+    "artifact": "C:\\Users\\centu\\Documents\\proyects\\nest\\prueba-tecnica1\\.serverless\\pruebaTecnica.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/pruebaTecnica/dev/1729791729964-2024-10-24T17:42:09.964Z",
+    "artifactDirectoryName": "serverless/pruebaTecnica/dev/1729890478252-2024-10-25T21:07:58.252Z",
     "artifact": "pruebaTecnica.zip"
   }
 }

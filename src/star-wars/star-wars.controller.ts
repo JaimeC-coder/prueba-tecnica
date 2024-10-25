@@ -1,10 +1,12 @@
 import { Controller, Get, Post, Body, Param  } from '@nestjs/common';
 import { StarWarsService } from './star-wars.service';
-@Controller('star-wars')
+
+
+@Controller('api')
 export class StarWarsController {
   constructor(private readonly personajesService: StarWarsService) {}
 
-  @Get()
+  @Get('')
   findAll() {
     return this.personajesService.getPersonas();
   }

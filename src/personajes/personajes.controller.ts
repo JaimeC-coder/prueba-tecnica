@@ -2,11 +2,11 @@ import { Controller, Get, Post, Body,Param } from '@nestjs/common';
 import { PersonajesService } from './personajes.service';
 import { CreatePersonajeDto } from './dtos/create-personaje.dto';
 
-@Controller('personajes')
+@Controller('api/personajes1')
 export class PersonajesController {
   constructor(private readonly personajesService: PersonajesService) {}
 
-  @Get()
+  @Get('')
   findAll() {
     return this.personajesService.findAll();
   }
