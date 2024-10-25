@@ -19,4 +19,6 @@ export class PersonajesService {
     async findOne(id: string) {
       return this.dynamoDBService.getItem(id);
     }
+
+    
 }

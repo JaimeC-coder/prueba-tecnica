@@ -1,7 +1,6 @@
-
 org: universidadnt
-app: pruebatecnica
-service: pruebaTecnica
+app: pruebatecnica2
+service: pruebaTecnica2
 
 provider:
   name: aws
@@ -18,8 +17,8 @@ provider:
 
 functions:
   main:
-    handler: dist/serverless.handler
-    timeout: 30
+    handler: dist/serverless.handler  # Verifica que este archivo y función existan
+    timeout: 30  # Ajusta el timeout si es necesario
     events:
       - http:
           method: ANY
@@ -36,9 +35,6 @@ package:
     - .gitignore
     - .git/**
     - README.md
-    - package-lock.json
-    - tsconfig.json
-    - yarn.lock
 
 resources:
   Resources:
@@ -53,8 +49,9 @@ resources:
           - AttributeName: id
             KeyType: HASH
         BillingMode: PAY_PER_REQUEST
+
 build:
   esbuild: false
 
-plugins:
-  - serverless-offline
+# plugins:
+#   - serverless-offline
