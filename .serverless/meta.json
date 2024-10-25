@@ -136,13 +136,13 @@
                     "Properties": {
                       "Code": {
                         "S3Bucket": "serverless-framework-deployments-us-east-1-b6d524f4-8955",
-                        "S3Key": "serverless/pruebaTecnica/dev/1729791729964-2024-10-24T17:42:09.964Z/pruebaTecnica.zip"
+                        "S3Key": "serverless/pruebaTecnica/dev/1729823401711-2024-10-25T02:30:01.711Z/pruebaTecnica.zip"
                       },
                       "Handler": "dist/serverless.handler",
                       "Runtime": "nodejs20.x",
                       "FunctionName": "pruebaTecnica-dev-main",
                       "MemorySize": 1024,
-                      "Timeout": 6,
+                      "Timeout": 30,
                       "Environment": {
                         "Variables": {
                           "TABLE_NAME": "pruebaTecnica-table"
@@ -159,14 +159,14 @@
                       "MainLogGroup"
                     ]
                   },
-                  "MainLambdaVersionfQ3xB3feCrHqeRbAl1llfMugvEsGCn0pYale77R0": {
+                  "MainLambdaVersionOcfh2ssopfcj1bQgI4SP3Vn18E1k9odZNCybC1Fc": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "MainLambdaFunction"
                       },
-                      "CodeSha256": "Sj6PKxzYwLTKTr/ZFU+adVPxdbl0xaWicnhPmtfDPAk="
+                      "CodeSha256": "92YO9D973vsRfNt5b6SWJiG4srvoTy8+rcFhx1TQYZE="
                     }
                   },
                   "ApiGatewayRestApi": {
@@ -291,7 +291,7 @@
                       "MainLambdaPermissionApiGateway"
                     ]
                   },
-                  "ApiGatewayDeployment1729791726947": {
+                  "ApiGatewayDeployment1729823398468": {
                     "Type": "AWS::ApiGateway::Deployment",
                     "Properties": {
                       "RestApiId": {
@@ -371,7 +371,7 @@
                   "MainLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "MainLambdaVersionfQ3xB3feCrHqeRbAl1llfMugvEsGCn0pYale77R0"
+                      "Ref": "MainLambdaVersionOcfh2ssopfcj1bQgI4SP3Vn18E1k9odZNCybC1Fc"
                     },
                     "Export": {
                       "Name": "sls-pruebaTecnica-dev-MainLambdaFunctionQualifiedArn"
@@ -410,6 +410,7 @@
             "functions": {
               "main": {
                 "handler": "dist/serverless.handler",
+                "timeout": 30,
                 "events": [
                   {
                     "http": {
@@ -429,10 +430,9 @@
                 "name": "pruebaTecnica-dev-main",
                 "package": {},
                 "memory": 1024,
-                "timeout": 6,
                 "runtime": "nodejs20.x",
                 "vpc": {},
-                "versionLogicalId": "MainLambdaVersionfQ3xB3feCrHqeRbAl1llfMugvEsGCn0pYale77R0"
+                "versionLogicalId": "MainLambdaVersionOcfh2ssopfcj1bQgI4SP3Vn18E1k9odZNCybC1Fc"
               }
             },
             "package": {
@@ -450,7 +450,7 @@
               "artifactsS3KeyDirname": "serverless/pruebaTecnica/dev/code-artifacts",
               "deploymentBucket": "serverless-framework-deployments-us-east-1-b6d524f4-8955",
               "artifact": "C:\\Users\\centu\\Documents\\proyects\\nest\\prueba-tecnica\\.serverless\\pruebaTecnica.zip",
-              "artifactDirectoryName": "serverless/pruebaTecnica/dev/1729791729964-2024-10-24T17:42:09.964Z"
+              "artifactDirectoryName": "serverless/pruebaTecnica/dev/1729823401711-2024-10-25T02:30:01.711Z"
             },
             "resources": {
               "Resources": {
@@ -629,13 +629,13 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-us-east-1-b6d524f4-8955",
-                  "S3Key": "serverless/pruebaTecnica/dev/1729791729964-2024-10-24T17:42:09.964Z/pruebaTecnica.zip"
+                  "S3Key": "serverless/pruebaTecnica/dev/1729823401711-2024-10-25T02:30:01.711Z/pruebaTecnica.zip"
                 },
                 "Handler": "dist/serverless.handler",
                 "Runtime": "nodejs20.x",
                 "FunctionName": "pruebaTecnica-dev-main",
                 "MemorySize": 1024,
-                "Timeout": 6,
+                "Timeout": 30,
                 "Environment": {
                   "Variables": {
                     "TABLE_NAME": "pruebaTecnica-table"
@@ -652,14 +652,14 @@
                 "MainLogGroup"
               ]
             },
-            "MainLambdaVersionfQ3xB3feCrHqeRbAl1llfMugvEsGCn0pYale77R0": {
+            "MainLambdaVersionOcfh2ssopfcj1bQgI4SP3Vn18E1k9odZNCybC1Fc": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "MainLambdaFunction"
                 },
-                "CodeSha256": "Sj6PKxzYwLTKTr/ZFU+adVPxdbl0xaWicnhPmtfDPAk="
+                "CodeSha256": "92YO9D973vsRfNt5b6SWJiG4srvoTy8+rcFhx1TQYZE="
               }
             },
             "ApiGatewayRestApi": {
@@ -784,7 +784,7 @@
                 "MainLambdaPermissionApiGateway"
               ]
             },
-            "ApiGatewayDeployment1729791726947": {
+            "ApiGatewayDeployment1729823398468": {
               "Type": "AWS::ApiGateway::Deployment",
               "Properties": {
                 "RestApiId": {
@@ -864,7 +864,7 @@
             "MainLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "MainLambdaVersionfQ3xB3feCrHqeRbAl1llfMugvEsGCn0pYale77R0"
+                "Ref": "MainLambdaVersionOcfh2ssopfcj1bQgI4SP3Vn18E1k9odZNCybC1Fc"
               },
               "Export": {
                 "Name": "sls-pruebaTecnica-dev-MainLambdaFunctionQualifiedArn"
@@ -903,6 +903,7 @@
       "functions": {
         "main": {
           "handler": "dist/serverless.handler",
+          "timeout": 30,
           "events": [
             {
               "http": {
@@ -922,10 +923,9 @@
           "name": "pruebaTecnica-dev-main",
           "package": {},
           "memory": 1024,
-          "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "MainLambdaVersionfQ3xB3feCrHqeRbAl1llfMugvEsGCn0pYale77R0"
+          "versionLogicalId": "MainLambdaVersionOcfh2ssopfcj1bQgI4SP3Vn18E1k9odZNCybC1Fc"
         }
       },
       "package": {
@@ -943,7 +943,7 @@
         "artifactsS3KeyDirname": "serverless/pruebaTecnica/dev/code-artifacts",
         "deploymentBucket": "serverless-framework-deployments-us-east-1-b6d524f4-8955",
         "artifact": "C:\\Users\\centu\\Documents\\proyects\\nest\\prueba-tecnica\\.serverless\\pruebaTecnica.zip",
-        "artifactDirectoryName": "serverless/pruebaTecnica/dev/1729791729964-2024-10-24T17:42:09.964Z"
+        "artifactDirectoryName": "serverless/pruebaTecnica/dev/1729823401711-2024-10-25T02:30:01.711Z"
       },
       "resources": {
         "Resources": {
@@ -976,7 +976,7 @@
         "serverless-offline"
       ]
     },
-    "serviceRawFile": "\r\norg: universidadnt\r\napp: pruebatecnica\r\nservice: pruebaTecnica\r\n\r\nprovider:\r\n  name: aws\r\n  runtime: nodejs20.x\r\n  environment:\r\n    TABLE_NAME: ${self:service}-table\r\n  iamRoleStatements:\r\n    - Effect: Allow\r\n      Action:\r\n        - dynamodb:PutItem\r\n        - dynamodb:GetItem\r\n        - dynamodb:Scan\r\n      Resource: 'arn:aws:dynamodb:us-east-1:982081073415:table/${self:provider.environment.TABLE_NAME}'\r\n\r\nfunctions:\r\n  main:\r\n    handler: dist/serverless.handler\r\n    events:\r\n      - http:\r\n          method: ANY\r\n          path: /\r\n      - http:\r\n          method: ANY\r\n          path: '{proxy+}'\r\n\r\npackage:\r\n  exclude:\r\n    - node_modules/**\r\n    - src/**\r\n    - tests/**\r\n    - .gitignore\r\n    - .git/**\r\n    - README.md\r\n    - package-lock.json\r\n    - tsconfig.json\r\n    - yarn.lock\r\n\r\nresources:\r\n  Resources:\r\n    StarWarsTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: ${self:provider.environment.TABLE_NAME}\r\n        AttributeDefinitions:\r\n          - AttributeName: id\r\n            AttributeType: S\r\n        KeySchema:\r\n          - AttributeName: id\r\n            KeyType: HASH\r\n        BillingMode: PAY_PER_REQUEST\r\nbuild:\r\n  esbuild: false\r\n\r\nplugins:\r\n  - serverless-offline",
+    "serviceRawFile": "\r\norg: universidadnt\r\napp: pruebatecnica\r\nservice: pruebaTecnica\r\n\r\nprovider:\r\n  name: aws\r\n  runtime: nodejs20.x\r\n  environment:\r\n    TABLE_NAME: ${self:service}-table\r\n  iamRoleStatements:\r\n    - Effect: Allow\r\n      Action:\r\n        - dynamodb:PutItem\r\n        - dynamodb:GetItem\r\n        - dynamodb:Scan\r\n      Resource: 'arn:aws:dynamodb:us-east-1:982081073415:table/${self:provider.environment.TABLE_NAME}'\r\n\r\nfunctions:\r\n  main:\r\n    handler: dist/serverless.handler\r\n    timeout: 30\r\n    events:\r\n      - http:\r\n          method: ANY\r\n          path: /\r\n      - http:\r\n          method: ANY\r\n          path: '{proxy+}'\r\n\r\npackage:\r\n  exclude:\r\n    - node_modules/**\r\n    - src/**\r\n    - tests/**\r\n    - .gitignore\r\n    - .git/**\r\n    - README.md\r\n    - package-lock.json\r\n    - tsconfig.json\r\n    - yarn.lock\r\n\r\nresources:\r\n  Resources:\r\n    StarWarsTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: ${self:provider.environment.TABLE_NAME}\r\n        AttributeDefinitions:\r\n          - AttributeName: id\r\n            AttributeType: S\r\n        KeySchema:\r\n          - AttributeName: id\r\n            KeyType: HASH\r\n        BillingMode: PAY_PER_REQUEST\r\nbuild:\r\n  esbuild: false\r\n\r\nplugins:\r\n  - serverless-offline",
     "command": [
       "deploy"
     ],
@@ -1015,12 +1015,12 @@
     "serviceUniqueId": "arn:aws:cloudformation:us-east-1:982081073415:stack/pruebaTecnica-dev/99b7ee20-9203-11ef-988b-12473321f867",
     "serviceProviderAwsCfStackId": "arn:aws:cloudformation:us-east-1:982081073415:stack/pruebaTecnica-dev/99b7ee20-9203-11ef-988b-12473321f867",
     "serviceProviderAwsCfStackCreated": "2024-10-24T12:29:23.464Z",
-    "serviceProviderAwsCfStackUpdated": "2024-10-24T17:42:16.088Z",
+    "serviceProviderAwsCfStackUpdated": "2024-10-25T02:30:08.193Z",
     "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
     "serviceProviderAwsCfStackOutputs": [
       {
         "OutputKey": "MainLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:982081073415:function:pruebaTecnica-dev-main:1",
+        "OutputValue": "arn:aws:lambda:us-east-1:982081073415:function:pruebaTecnica-dev-main:4",
         "Description": "Current Lambda function version",
         "ExportName": "sls-pruebaTecnica-dev-MainLambdaFunctionQualifiedArn"
       },
